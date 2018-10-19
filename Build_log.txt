@@ -1,0 +1,15 @@
+Tasks:
+Build interface board-  Initial design submitted to JLPCB for manuafacture 10-15-18
+
+Raspberry pi OS and NodeJS installed on 10-18-18.  Wireless configured and set to run headless utilizing SSH to access.
+
+Next
+Build the basic temperature control loop in NodeJS utilizing a proto board and LEDs for activiation output till 
+the interface board arrives.
+
+
+Eventually
+Solder components to the interface board
+Install sensors in remote locations.
+Build web interface
+
