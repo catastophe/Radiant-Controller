@@ -4,10 +4,10 @@ Goal of this Project
 To Build a Radiant Heat controller that will sense and modulate heat to 4 zones in a house.
 Build a web interface to adjust temperature setpoints.
 
-Utilizing
-Raspberry Pi 3B+
-Node JS
-AM2302 Temperature and Humidity sensors
+Utilizing:
+Raspberry Pi 3B+,
+Node JS,
+AM2302 Temperature and Humidity sensors,
 Custom PCB to interface between Raspberry Pi sensors and the heating unit.
 
 Boiler Unit and Zone distribution Panel
