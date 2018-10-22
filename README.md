@@ -2,7 +2,8 @@
 
 Goal of this Project
 To Build a Radiant Heat controller that will sense and modulate heat to 4 zones in a house.
-Build a web interface to adjust temperature setpoints.
+Build a web interface to adjust temperature setpoints.  Initially I'll plan to get the system to 
+operate with one zone and then expand it to work with 4.
 
 Utilizing:
 Raspberry Pi 3B+,
