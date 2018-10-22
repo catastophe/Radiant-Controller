@@ -13,3 +13,8 @@ Solder components to the interface board
 Install sensors in remote locations.
 Build web interface
 
+
+10-21-18
+hs.js and Index.html have been uploaded to git
+hs.js is my first crack at writing a temperature controlling loop that will turn on and off the out put to the heater
+based on a simple test.  Actual temperature vs a setpoint.  The setpoint can be modified with with a simple web interface (index.html).
