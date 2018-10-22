@@ -3,18 +3,29 @@ Build interface board-  Initial design submitted to JLPCB for manuafacture 10-15
 
 Raspberry pi OS and NodeJS installed on 10-18-18.  Wireless configured and set to run headless utilizing SSH to access.
 
-Next
-Build the basic temperature control loop in NodeJS utilizing a proto board and LEDs for activiation output till 
-the interface board arrives.
+Programming todo's
+Heater Controller (hs.js)
+Build the basic temperature control loop in NodeJS utilizing a proto board and LEDs to simulate output activiation till 
+the interface board arrives.  Prototype functionality is working.
+Need to broadcast the current measured house temperature to whatever clients are listening.
+Need to install limits for the temperature setpoint range.  Help prevent the stupid.
+Need to look into how to determine what a bad sensor looks like so it can be caught and reported.  Because Murphy is a thing. 
+
+Web Interface(index.html)
+Build web interface - prototype functionality working.
+Currently the Display'd current temperature is a placeholder.  Needs to be catch a broadcast from the server and display
+the actual real temp the system thinks exists.
 
 
+Hardware todo's
 Eventually
 Solder components to the interface board
 Install sensors in remote locations.
-Build web interface
+Security - Currently using a firewall to limit access to anyone that isn't on the local subnet.  This could be more robust
 
 
 10-21-18
 hs.js and Index.html have been uploaded to git
 hs.js is my first crack at writing a temperature controlling loop that will turn on and off the out put to the heater
 based on a simple test.  Actual temperature vs a setpoint.  The setpoint can be modified with with a simple web interface (index.html).
+I noticed that some setpoint limits will need to be installed.  Currently I can set an on/off threshold of 10 million degrees if I so choose to click the button that long.  I need to limit the range to something like 50 to 75 degrees,  sound like good values off the top of my head.
