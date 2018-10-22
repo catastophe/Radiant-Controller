@@ -1,0 +1,32 @@
+{
+  "name": "heater",
+  "version": "0.0.1",
+  "description": "web interface to control a household zoned radiant heat",
+  "main": "hs.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-dht-sensor": "^0.0.34",
+    "onoff": "^3.2.2",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catastophe/Radiant-Controller.git"
+  },
+  "keywords": [
+    "nodejs",
+    "zoned",
+    "heat",
+    "control"
+  ],
+  "author": "Sam Murray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/catastophe/Radiant-Controller/issues"
+  },
+  "homepage": "https://github.com/catastophe/Radiant-Controller#readme"
+}
