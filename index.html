@@ -36,8 +36,8 @@ div.current{
 </style>
 <body>
 
-<div class="top" >Current temperature is ? </div>
-<div class="top" > 70 deg F</div>
+<div class="top" id="house_temp">Temperature and Humidity is: waiting update . . . </div>
+<div class="top" id="mech_status">Heater status is: Waiting update . . .</div>
   <div class="col_left">
     <div></div>
     <div class="current">Set point</div>
@@ -55,6 +55,15 @@ div.current{
 <script>
 var socket = io();
 console.log('socket loaded');
+
+socket.on('broadcast',function(data) {
+	console.log(data);
+	if (data.boiler) {var boiler="ON"} else {var boiler="OFF"}
+		document.getElementById("house_temp").innerHTML = 
+		'Temperature is: ' + data.temp.toFixed(1) + '  Humidity is: ' + data.humid.toFixed(1);
+
+		document.getElementById("mech_status").innerHTML =	'Heater is: ' + boiler;
+	});
 
 function increasetemp() {
     var new_temp = Number(document.getElementById("new_temp").innerHTML);

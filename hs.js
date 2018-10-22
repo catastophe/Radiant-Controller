@@ -4,9 +4,9 @@ var io = require('socket.io')(http);  //websockets
 var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
 var sensor = require('node-dht-sensor');
 var HEAT_OUTPUT = new Gpio(19, 'out'); //use GPIO pin 4, and specify that it is output
-
+ 
 //var VENT_OUTPUT = new Gpio(4, 'out');// Future Ventilation unit activation output
-//var ZONE1 = new Gpio(16, 'out');// Future Zone 1 temperature inputs for AM2302
+//var ZONE1 = new Gpio(12, 'out');// Future Zone 1 temperature inputs for AM2302
 //var ZONE2 = new Gpio(4, 'out');// Future Zone 2 temperature inputs for AM2302
 //var ZONE3 = new Gpio(4, 'out');// Future Zone 3 temperature inputs for AM2302
 //var ZONE4 = new Gpio(4, 'out');// Future Zone 4 temperature inputs for AM2302
@@ -14,13 +14,15 @@ var HEAT_OUTPUT = new Gpio(19, 'out'); //use GPIO pin 4, and specify that it is 
 
 
 let heater_temp = 70;  //default value to set the temperature till the sensors are polled.
+let house_humidity = 50;   // default value till the sensors getted polled
 let heat_setpoint = 72; //default setpoint for the temperature of the house.  So programs starts with the heat off.
 let temp_check_interval = 1000 * 10;   // milliseconds mulitplied by the number of seconds between temperature checks 
 let zone1_temp=0;
 
-sensor.read(22, 12, function(err, temperature, humidity) {
-    console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
-    });
+// code to test the reading of the AM2302 on GPIO 12
+// sensor.read(22, 12, function(err, temperature, humidity) {
+//     console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
+//     });
 
 
 //// check the temperature to turn on the heater every interval
@@ -31,7 +33,8 @@ sensor.read(22, 12, function(err, temperature, humidity) {
 
  	sensor.read(22, 12, function(err, temperature, humidity) {
  		heater_temp = temperature *1.8+32;
- 		console.log(zone1_temp);
+ 		house_humidity = humidity
+ 	//	console.log(zone1_temp);
         console.log('temp: ' + temperature.toFixed(1) + '°C, ' + 'humidity: ' + humidity.toFixed(1) + '%');
 	});
 
@@ -48,6 +51,7 @@ sensor.read(22, 12, function(err, temperature, humidity) {
  		boiler_active="OFF"};
 
  	console.log ("Setpoint is: " +setpoint + "   Current Temperature is: " + temp +"   Boiler is: "+boiler_active);
+ 	io.sockets.emit('broadcast',{temp: heater_temp, humid: house_humidity, boiler: HEAT_OUTPUT.readSync()});
  	},temp_check_interval);
 
 
@@ -61,6 +65,7 @@ app.get('/', function(req, res){
 //When a client connects this socket fires
 io.on('connection', function(socket){
   console.log('a user connected');
+  //io.sockets.emit('broadcast',{temp: heater_temp,boiler: HEAT_OUTPUT.readSync()});
   var switchvalue = 0;
 /////////
 
