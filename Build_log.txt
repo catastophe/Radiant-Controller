@@ -3,23 +3,24 @@ Build interface board-  Initial design submitted to JLPCB for manuafacture 10-15
 
 Raspberry pi OS and NodeJS installed on 10-18-18.  Wireless configured and set to run headless utilizing SSH to access.
 
-Programming todo's (hs.js)
+Server Needs (hs.js)
 * Build the basic temperature control loop in NodeJS utilizing a proto board and LEDs to simulate output activiation till 
 the interface board arrives.  Working, but will be an ongoing item for refinement
-*Need to broadcast the current measured house temperature to whatever clients are listening.
+DONE - Need to broadcast the current measured house temperature to whatever clients are listening.
 *Need to install limits for the temperature setpoint range.  Help prevent the stupid.
 *Need to look into how to determine what a bad sensor looks like so it can be caught and reported.  Because Murphy is a thing. 
 
 
 Web Interface(index.html)
 *Build web interface - On going item that will recieve refinement over time.
-*Currently the Display'd current temperature is a placeholder.  Needs to be able to catch a broadcast from the server and display
+*DONE - Currently the Display'd current temperature is a placeholder.  Needs to be able to catch a broadcast from the server and display
 the actual real temp the system thinks exists.
+*Need to add a system enable/disable toggle 
 
 
 Hardware todo's
 Eventually
-*Need to set up a 24 VAC source to verify the triac works on prototype board.
+*Need to set up a 24 VAC source to verify the triac works on prototype board.  Yes, I could use a relay, but I want practice with a triac.
 *Solder components to the interface board on that is on order.
 *Install sensors in remote locations.
 *Security - Currently using a firewall to limit access to anyone that isn't on the local subnet.  This could be more robust
@@ -29,6 +30,7 @@ Eventually
 *hs.js utilizing the prototyping board is now polling the AM2302 to grab the room temperature instead and will light the test LED
 (indicating the output to the heater for now) when the setpoint is higher than the room temperature and turn off the LED when the
 setpoint is below room temperature.
+* Now the house temp ,humidity, and heater on/off status is broadcast to the web interface during each update.
 
 
 10-21-18
