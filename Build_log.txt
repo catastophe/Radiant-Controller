@@ -20,7 +20,6 @@ the actual real temp the system thinks exists.
 
 Hardware todo's
 Eventually
-*Need to set up a 24 VAC source to verify the triac works on prototype board.  Yes, I could use a relay, but I want practice with a triac.
 *Solder components to the interface board on that is on order.
 *Install sensors in remote locations.
 *Security - Currently using a firewall to limit access to anyone that isn't on the local subnet.  This could be more robust
@@ -30,7 +29,12 @@ Eventually
 *hs.js utilizing the prototyping board is now polling the AM2302 to grab the room temperature instead and will light the test LED
 (indicating the output to the heater for now) when the setpoint is higher than the room temperature and turn off the LED when the
 setpoint is below room temperature.
-* Now the house temp ,humidity, and heater on/off status is broadcast to the web interface during each update.
+*Now the house temp ,humidity, and heater on/off status is broadcast to the web interface during each update.
+*Whoa, apparently I confused my ventilation input signal with the heater.  What that means is that the 24 VAC that I thought I needed to short to operate the heater is acutally a 15 VDC signal. So a Triac that I was thinking about won't work.  I measured
+the 15 VDC load with a amp meter and its only 6 milliamp.  I'm thinking a simple opto-coupler can handle that.  So I mocked it up
+on a breadboard and it works.
+*Next problem is that the PCB I designed is wrong. I was planning on Triacs.  But it isn't a total miss.  I had a 4 channel
+opto-coupler to power the triacs instead of the Pi itself.  So I should be able to bypass the Triacs with a little hookup wire. I have to address that when the board arrives.  Maybe I'll design another later we'll see.
 
 
 10-21-18
@@ -40,7 +44,7 @@ Prototyping board has a 2x20 header, 1 LED, a triac and a AM2302 sensor on board
 
 10-20-18
 hs.js and Index.html have been uploaded to git
-hs.js is my first crack at writing a temperature controlling loop that will turn on and off the out put to the heater
+hs.js is my first crack at writing a temperature controlling loop that will turn on and off the output to the heater
 based on a simple test.  Actual temperature vs a setpoint.  The setpoint can be modified with with a simple web interface (index.html).
 I noticed that some setpoint limits will need to be installed.  Currently I can set an on/off threshold of 10 million degrees if
 I so chose to click the button that long.  I need to limit the range to something like 50 to 75 degrees,  sound like good values
