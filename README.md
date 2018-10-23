@@ -16,7 +16,7 @@ Already has a built in ability to maintain temperature of the water being pumped
 of pipes running throughout the floor. All it needs is a signal to activate at this time.  Currently all zones
 receive heat at the same time and individual zone control isn't possible till motorized valve controls are added.
 Individual control is a longer term goal.   
-For boiler and pump activation;  The unit has a 24 volt AC signal that needs to be shorted between two terminals.  This would
+For boiler and pump activation;  The unit has a 15 volt DC signal that needs to be shorted between two terminals.  This would
 normally be connected to some type of bimetal thermometer or relay controller at a remote location. 
 
 AM2302 Sensors
