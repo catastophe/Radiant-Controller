@@ -25,6 +25,19 @@ Eventually
 *Security - Currently using a firewall to limit access to anyone that isn't on the local subnet.  This could be more robust
 
 
+10-24-18
+The controller was programmed to check the temperature every five seconds and send updates to the webpage.  If the house
+temperature was below the setpoint it would turn on/off accordingly.  So in theory I could end up with the heater cycling on/off
+every five seconds all day long.  It would probably cause wear and tear on something.  So while that cycle time was nice for troubleshooting.  I made adjustments.  I now have 2 interval loops running in the (ht.js).  The first one is just like the original,
+it takes samples of the temperatures and boiler status and reports that information to any connected clients in 5 second intervals.
+It does have the capability to activate the heater but I'll come back to this.  The 2nd interval loop is the primary heating
+loop,  All it does is check and compare temperatures to setpoints and turns on/off the heater accordingly every 30 minutes.  Which means the heater will have a 30 minute on or off time.  This is a rough guess on how long it takes to heat my particular house.  This value would need to change as needed for other homes.  Now what if your cold and you want to change the setpoint.  My wife isn't going to be
+happy about waiting a possible 30 minutes for the primary heat interval to timeout adjust and kick the heater on.  So whenever a
+client updates the setpoint.  I added a force_change variable that gets sets to 1.   I added a condition statement to the status
+updating loop.  Whenever it sees a force_change = 1, it will additionaly compare the new setpoint to the current temperature and
+turn on/off the heater accordingly.   So I have limited a risk to rapid cycling and provisioned for a rapid response to change.
+Currently seems to be working well on my cobbled together protoboard.  Hopefully I'll receieve the designed PCB 10/31/18
+
 10-22-18
 *hs.js utilizing the prototyping board is now polling the AM2302 to grab the room temperature instead and will light the test LED
 (indicating the output to the heater for now) when the setpoint is higher than the room temperature and turn off the LED when the
