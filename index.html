@@ -60,9 +60,10 @@ socket.on('broadcast',function(data) {
 	console.log(data);
 	if (data.boiler) {var boiler="ON"} else {var boiler="OFF"}
 		document.getElementById("house_temp").innerHTML = 
-		'Temperature is: ' + data.temp.toFixed(1) + '  Humidity is: ' + data.humid.toFixed(1);
+		'Temperature is: ' + data.temp + '  Humidity is: ' + data.humid.toFixed(1);
 
 		document.getElementById("mech_status").innerHTML =	'Heater is: ' + boiler;
+		document.getElementById("new_temp").innerHTML =	data.setpoint;
 	});
 
 function increasetemp() {
