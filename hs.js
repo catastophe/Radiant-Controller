@@ -13,7 +13,8 @@ var ZONE1 = new Gpio(19, 'out');//  Zone 1 temperature inputs for AM2302
 //var ZONE4 = new Gpio(4, 'out');// Future Zone 4 temperature inputs for AM2302
 //var ZONE5 = new Gpio(4, 'out');// Future Zone 5 temperature inputs for AM2302
 
-
+let min_house_temp = 60; //Sets a minimum acceptable temperature that can be accepted from a client
+let max_house_temp = 75; //Sets a maximum acceptable temperature that can be accepted from a client.
 let heater_temp = 70;  //default value to set the temperature till the sensors are polled.
 let house_humidity = 50;   // default value till the sensors getted polled
 let heat_setpoint = 71; //default setpoint for the temperature of the house.  So programs starts with the heat off.
@@ -138,8 +139,10 @@ io.on('connection', function(socket){
 
 	 ////// recieves a change in the temperature setpoint from client
 	socket.on('new_temp', function(data){
-		heat_setpoint = data;   //records the new setpoint for use in the control loop
-		force_change=1;
+		if (min_house_temp < data < max_house_temp) {   // sets boundries of an acceptable temperature recieved from a client.
+			heat_setpoint = data;   //records the new setpoint for use in the control loop
+			force_change=1;
+		}		
 		//console.log(heat_setpoint +"and force_change is "+ force_change);
 	})
 
