@@ -1,7 +1,7 @@
 Tasks:
 Build interface board-  Initial design submitted to JLPCB for manuafacture 10-15-18
 
-Raspberry pi OS and NodeJS installed on 10-18-18.  Wireless configured and set to run headless utilizing SSH to access.
+Raspberry pi OS and NodeJS installed on 10-18-18.  Configured for wireless and headless, utilizing SSH to access.
 
 Server Needs (hs.js)
 * Build the basic temperature control loop in NodeJS utilizing a proto board and LEDs to simulate output activiation till 
@@ -23,6 +23,10 @@ Eventually
 *Solder components to the interface board on that is on order.
 *Install sensors in remote locations.
 *Security - Currently using a firewall to limit access to anyone that isn't on the local subnet.  This could be more robust
+
+
+12-26-18
+Been awhile since I updated this.  I've installed a second sensor at the other end of the house.  So far the raspberry pi has been reading the signals flawlessly over 60ft away over non-data rated copper wire.  Interface board rev1 didn't quite work out the door.  I had to rework my design a bit and I was able to get a working result that allowed me to see my code function. Since then, I've modified the design by loosing the shift register and utilizing an optocoupler for controlling the heater system.  Added in several opto-triacs to control the ventillation system and hopefully future proof it a little bit to control the zone valves.  I'll submit the images later today and update the code for both the server and html.  Lots has changed.
 
 
 10-24-18
