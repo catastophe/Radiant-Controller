@@ -23,6 +23,8 @@ Eventually
 *Solder components to the interface board on that is on order.
 *Install sensors in remote locations.
 *Security - Currently using a firewall to limit access to anyone that isn't on the local subnet.  This could be more robust
+1/7/2019
+I have a new sensor installed in the Bathroom.  The idea being to automatically detect when the humidity is rising presumably from someone taking a shower and turn on the fan.
 
 
 12-26-18
