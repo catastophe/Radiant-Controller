@@ -1,0 +1,77 @@
+G04 ---------------------------- Layer name :KeepOutLayer*
+G04 Sat, 24 Nov 2018 04:00:05 GMT*
+G04 67e7144068ef4060983f5ba8a8309223*
+G04 Gerber Generator version 0.2*
+G04 Scale: 100 percent, Rotated: No, Reflected: No *
+G04 Dimensions in inches *
+G04 leading zeros omitted , absolute positions ,2 integer and 4 decimal *
+%FSLAX24Y24*%
+%MOIN*%
+G90*
+G70D02*
+
+%ADD10C,0.010000*%
+
+G04 ---------------------------- Boardoutline Start*
+G54D10*
+G01X0Y22200D02*
+G01X0Y22200D01*
+G01X13100Y22200D01*
+G01X25700Y22200D01*
+G01X25700Y16500D01*
+G01X25700Y10900D01*
+G01X25700Y0D01*
+G01X100Y0D01*
+G01X0Y22200D01*
+
+G04 ---------------------------- Boardoutline End*
+
+G04 ---------------------------- copperAreaA Start*
+
+G04 ---------------------------- copperAreaA End*
+
+G04 ---------------------------- planeZoneA Start*
+
+G04 ---------------------------- planeZoneA End*
+
+G04 ---------------------------- Positive polarity*
+
+%LPD*%
+
+G04 ---------------------------- track start*
+
+G04 ---------------------------- track end*
+
+G04 ---------------------------- text start*
+
+G04 ---------------------------- text end*
+
+G04 ---------------------------- protractor start*
+
+G04 ---------------------------- protractor end*
+
+G04 ---------------------------- PAD Start*
+
+G04 ---------------------------- PAD End*
+
+G04 ---------------------------- ARC Start*
+
+G04 ---------------------------- ARC End*
+
+G04 ---------------------------- CIRCLE Start*
+
+G04 ---------------------------- CIRCLE End*
+
+G04 ---------------------------- RECT Start*
+
+G04 ---------------------------- RECT End*
+
+G04 ---------------------------- SOLIDREGION Start*
+
+G04 ---------------------------- SOLIDREGION End*
+
+G04 ---------------------------- ALL layer Pad Via Start*
+
+G04 ---------------------------- ALL layer Pad Via End*
+M00*
+M02*
