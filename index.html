@@ -12,73 +12,274 @@ div.top {
     font-size: 50px;
 }
 
-div.col_left {
-    width: 50%;
-/*    height: 20%;*/
-    float: left;
-    font-size: 60px;
+div.tab{
+	float: left;
+	text-align: center;
+	min-height: 20%;
+	padding-top: 25px;
+	width: 33%;
 }
 
-div.col_right {
-	font-size: 40px;
-    width: 50%;
-/*    height: 40%;*/
-    float: left;
+div.zoneT{
+	padding-top: 50px;
+	padding-bottom: 15px;
+	float: left;
+	text-align: left;
 }
 
-div.current{
-    height:40%;
+div.zoneA{
+	float: left; 
+	width: 50%;
+	text-align: left;
+}
+
+div.zoneB{
+	float: left; 
+	width: 25%;
+	text-align: left;
+}
+
+button{
+	font-size: 50px;
+	min-width: 30%;
+}
+
+div.setpointheader{
+	font-size: 70px;
+    width: 100%;
+	padding-top: 20px;
+    float: top;
+    text-align: center;
+}
+
+div.setpoint{
+	float: top;
     width:100%;
     text-align:center;
-    padding: 20px 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
+
+select{
+	padding-right: 20px;
+	font-size: 70px;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 60px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 50px;
+  width: 50px;
+  left: 5px;
+  bottom: 5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(140px);
+  -ms-transform: translateX(140px);
+  transform: translateX(140px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 60px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 
 </style>
 <body>
 
-<div class="top" id="house_temp">Temperature and Humidity is: waiting update . . . </div>
-<div class="top" id="mech_status">Heater status is: Waiting update . . .</div>
-  <div class="col_left">
-    <div></div>
-    <div class="current">Set point</div>
-    <div class="current" id="new_temp">71</div>
-  <!--   <div><input type="checkbox" id="switch"> Enable/Disable</div> -->
-  </div>
-  <div class="col_right">
-    <div><button style="height:50%;width:100%;font-size: 80px" onclick="increasetemp()">Increase</button></div>
-    <div><button style="height:50%;width:100%;font-size: 80px" onclick="decreasetemp()">Decrease</button></div>
-  </div
+<div class="top" id="mech_status">Heater and Ventilation status is: Waiting update . . .</div>
+<div class="top" style="background-color: white">
+	<div class="tab"><button onclick="showtemp()">Temperature</button></div>
+	<div class="tab"><button onclick="showhumidity()" >Humidity</button></div>
+	<div class="tab"><button>Configuration</button></div>
+</div>
+<div class="top" style="background-color: white; margin-bottom: 50px">
+	<div class="zoneT" style="width:40%">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspZone</div>
+		<div class="zoneT" style="width:25%">Warmth</div>
+		<div class="zoneT" style="width:25%">Humidity</div>
 
-    <ul id="messages"></ul>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+	<div class="zoneA">Living room</div>
+		<div class="zoneB" id="livingtemp">&nbsp</div>
+		<div class="zoneB" id="livinghumid">&nbsp</div>
+		
+
+	<div class="zoneA">Master Room</div>
+		<div class="zoneB" id="mastertemp">&nbsp</div>
+		<div class="zoneB" id="masterhumid" >&nbsp</div>
+
+
+	<div class="zoneA">Lily's Room</div>
+		<div class="zoneB" id="bed2temp">&nbsp</div>
+		<div class="zoneB" id="bed2humid">&nbsp</div>
+
+
+	<div class="zoneA">Craft Room</div>
+		<div class="zoneB" id="bed3temp">&nbsp</div>
+		<div class="zoneB" id="bed3humid">&nbsp</div>
+
+
+	<div class="zoneA">Bath Room</div>
+		<div class="zoneB" id="bathtemp">&nbsp</div>
+		<div class="zoneB" id="bathhumid">&nbsp</div>
+
+
+	<div class="zoneA" >Outside</div>
+		<div class="zoneB" id="outsidetemp">&nbsp</div>
+		<div class="zoneB" id="outsidehumid" style="padding-bottom: 10%">&nbsp</div>
+</div >
+
+<div class="top" id="temp" style="background-color: white;">
+<div class="setpointheader">Temperature Setpoint</div>
+<div class="setpoint">
+	<select id="new_temp" onchange="changeTemp()">
+  		<option value="68">68</option>
+ 		<option value="69">69</option>
+ 		<option value="70">70</option>
+  		<option value="71">71</option>
+  		<option value="72">72</option>
+  		<option value="73">73</option>
+  		<option value="74">74</option> 
+	</select>
+</div>
+</div>
+
+
+<div class="top" id="humidity" style="display:none; background-color: white">
+	<div style="float: left; width: 50%">
+			<div class="setpointheader">Force HRV On</div>
+	<div class="setpoint">
+		<select id="hrv" onchange="forceHRV()">
+  			<option value="0">Take no action</option>
+  			<option value="15">15</option>
+ 			<option value="30">30</option>
+ 			<option value="45">45</option>
+  			<option value="60">60</option>
+  			<option value="-1">Force Off Now</option>
+		</select>
+	<div class="setpointheader">Minutes</div>
+</div>
+	</div>
+
+	<div style="float: left; width: 50%">
+			<br>
+			<label class="switch"><input type="checkbox" id="hrvhigh"><span class="slider round"></span></label><br>
+			High Speed
+	</div>
+</div>
+
+
+
+
+
+<ul id="messages"></ul>
+<script src="/socket.io/socket.io.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+
+
 <script>
 var socket = io();
 console.log('socket loaded');
 
 socket.on('broadcast',function(data) {
 	console.log(data);
-	if (data.boiler) {var boiler="ON"} else {var boiler="OFF"}
-		document.getElementById("house_temp").innerHTML = 
-		'Temperature is: ' + data.temp + '  Humidity is: ' + data.humid.toFixed(1);
-
-		document.getElementById("mech_status").innerHTML =	'Heater is: ' + boiler;
-		document.getElementById("new_temp").innerHTML =	data.setpoint;
+		document.getElementById("mech_status").innerHTML =	'Heater is: ' + data.boiler + '    Vent is: ' +data.vent;
+		document.getElementById("new_temp").value =	data.setpoint;
+		document.getElementById("mastertemp").innerHTML = data.mastertemp +"F";
+		document.getElementById("masterhumid").innerHTML = data.masterhumid +"%";
+		document.getElementById("livingtemp").innerHTML = data.livingtemp+"F";
+		document.getElementById("livinghumid").innerHTML = data.livinghumid +"%";
+		document.getElementById("bathtemp").innerHTML = data.bathtemp +"F";
+		document.getElementById("bathhumid").innerHTML = data.bathhumid +"%";	
 	});
 
+function changeTemp(){
+	var new_temp = Number(document.getElementById("new_temp").value);
+	socket.emit("new_temp",	Number(document.getElementById("new_temp").value));
+	console.log('sending temperature request');	
+}
+
+function forceHRV(){
+		var hrv = document.getElementById("hrv").value;
+		var speed = document.getElementById("hrvhigh").checked;
+		var msg = hrv+","+speed;
+		socket.emit("hrv",msg);
+		console.log(msg);
+}
+
+function showtemp(){
+	document.getElementById("humidity").style.display = "none";
+	document.getElementById("temp").style.display = "block";
+
+}
+
+
+function showhumidity(){
+	document.getElementById("humidity").style.display = "block";
+	document.getElementById("temp").style.display = "none";
+
+}
+
+
 function increasetemp() {
-    var new_temp = Number(document.getElementById("new_temp").innerHTML);
-    document.getElementById("new_temp").innerHTML= new_temp+1;
-    console.log(document.getElementById("new_temp").innerHTML)
-	socket.emit("new_temp", Number(document.getElementById("new_temp").innerHTML));
+    var new_temp = Number(document.getElementById("new_temp").value);
+    document.getElementById("new_temp").value= new_temp+1;
+    console.log(document.getElementById("new_temp").value)
+	socket.emit("new_temp", Number(document.getElementById("new_temp").value));
 	console.log('emiting socket data')	
 }
 
 function decreasetemp() {
-    var new_temp = Number(document.getElementById("new_temp").innerHTML);
-    document.getElementById("new_temp").innerHTML= new_temp-1;
-    console.log(document.getElementById("new_temp").innerHTML)
-	socket.emit("new_temp", Number(document.getElementById("new_temp").innerHTML));
+    var new_temp = Number(document.getElementById("new_temp").value);
+    document.getElementById("new_temp").value = new_temp-1;
+    console.log(document.getElementById("new_temp").value)
+	socket.emit("new_temp", Number(document.getElementById("new_temp").value));
 	console.log('emiting socket data')
 }
 
