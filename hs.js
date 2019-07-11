@@ -97,13 +97,13 @@ let showerisON = 0;
  	}
 
 //checking bathroom for high humidity and turning on
-	if (bathroom_humidity>70) {
+	if ((bathroom_humidity - house_humidity) > 10) {
 		HRV_OUTPUT_HIGH.writeSync(1);
 		hrv_auto_activation = 1;
 	}
 
 	
-	if (bathroom_humidity<64 && hrv_auto_activation == 1) {
+	if ((bathroom_humidity - house_humidity) < 5 && hrv_auto_activation == 1) {
 		hrv_auto_activation = "Timing out";
 		console.log('Started the bathroom vent off timeout');
 		setTimeout(function() {
